@@ -40,7 +40,7 @@ DEFAULT_CFLAGS = $(shell $(SDL_CONFIG) --cflags)
 MORE_CFLAGS = -DHAVE_CONFIG_H -I. -O2 -Wall \
  -DNO_STDIO_REDIRECT -DIRDA_JOY \
  -DPSPMAGIC_VERSION=\"$(PSPMAGIC_VERSION)\" \
- -DPSPFW30X
+ -DPSPFW30X -G0
 
 PSP_FW_VERSION=500
 
@@ -49,7 +49,7 @@ PSPMAGIC_VERSION=1.0.1
 CFLAGS = $(DEFAULT_CFLAGS) $(MORE_CFLAGS)
 CXXFLAGS = $(DEFAULT_CFLAGS) $(MORE_CFLAGS) -fno-exceptions -fno-rtti
 
-LIBS += -lpspwlan -lpspnet_inet -lpsppower -lSDL_image -lSDL -lpng -ljpeg -lpspaudio -lpspgu -lpsphprm -lz -lm 
+LIBS += -lpspwlan -lpspnet_inet -lpsppower -lSDL_image -lSDL -lpspirkeyb -lGL -lpng -ljpeg -lpsprtc -lpspvfpu -lpspaudio -lpspgu -lpsphprm -lz -lm 
 
 BUILD_PRX=1
 

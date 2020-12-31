@@ -23,6 +23,7 @@
 #include <pspctrl.h>
 #include <psptypes.h>
 #include <png.h>
+#include <zlib.h>
 
 #include "psp_sdl.h"
 #include "psp_global.h"
