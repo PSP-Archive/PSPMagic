@@ -49,7 +49,7 @@ PSPMAGIC_VERSION=1.0.1
 CFLAGS = $(DEFAULT_CFLAGS) $(MORE_CFLAGS)
 CXXFLAGS = $(DEFAULT_CFLAGS) $(MORE_CFLAGS) -fno-exceptions -fno-rtti
 
-LIBS += -lpspwlan -lpspnet_inet -lpsppower -lSDL_image -lSDL -lpspirkeyb -lGL -lpng -ljpeg -lpsprtc -lpspvfpu -lpspaudio -lpspgu -lpsphprm -lz -lm 
+LIBS += -lpspwlan -lpspnet_inet -lSDL_image -lSDL -lpspirkeyb -lGL -lpng -ljpeg -lpsprtc -lpspvfpu -lpspaudio -lpspgu -lpsphprm -lpsppower -lz -lm 
 
 BUILD_PRX=1
 
