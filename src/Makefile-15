@@ -1,0 +1,71 @@
+#
+# Copyright (C) 2009 Ludovic Jacomme (ludovic.jacomme@gmail.com)
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+#
+TARGET = pspmagic
+PSPSDK = $(shell psp-config --pspsdk-path)
+PSPBIN = $(shell psp-config --psp-prefix)/bin
+SDL_CONFIG = $(PSPBIN)/sdl-config
+OBJS = \
+\
+psp_main.o \
+psp_global.o \
+psp_magic.o \
+psp_font.o \
+psp_sdl.o \
+psp_danzeff.o \
+psp_fmgr.o \
+psp_kbd.o \
+psp_irda.o \
+psp_battery.o \
+psp_menu.o \
+psp_menu_help.o
+
+
+DEFAULT_CFLAGS = $(shell $(SDL_CONFIG) --cflags) 
+
+MORE_CFLAGS = -DHAVE_CONFIG_H -I. -O2 -Wall \
+ -DNO_STDIO_REDIRECT -DIRDA_JOY \
+ -DPSPMAGIC_VERSION=\"$(PSPMAGIC_VERSION)\"
+
+PSP_FW_VERSION=15
+
+PSPMAGIC_VERSION=1.0.1
+
+CFLAGS = $(DEFAULT_CFLAGS) $(MORE_CFLAGS)
+CXXFLAGS = $(DEFAULT_CFLAGS) $(MORE_CFLAGS) -fno-exceptions -fno-rtti
+
+LIBS += -lpspwlan -lpspnet_inet -lpsppower -lSDL_image -lSDL -lpng -ljpeg -lpspaudio -lpspgu -lpsphprm -lz -lm 
+
+EXTRA_TARGETS = EBOOT.PBP
+PSP_EBOOT_TITLE = PSPMAGIC-v$(PSPMAGIC_VERSION)
+PSP_EBOOT_ICON= pspmagic.png
+PSP_EBOOT_SND0= pspmagic.at3
+PSP_EBOOT_PIC1 = pspmagic-pic.png
+
+include $(PSPSDK)/lib/build.mak
+
+all: SCEkxploit
+
+install: SCEkxploit
+	@mkdir -p /media/usbdisk/psp/game150/__SCE__pspmagic/
+	@mkdir -p /media/usbdisk/psp/game150/%__SCE__pspmagic/
+	cp __SCE__pspmagic/EBOOT.PBP /media/usbdisk/psp/game150/__SCE__pspmagic/
+	cp %__SCE__pspmagic/EBOOT.PBP /media/usbdisk/psp/game150/%__SCE__pspmagic/
+
+realclean:
+	/bin/rm -f $(OBJS) EBOOT.PBP PARAM.SFO
+
